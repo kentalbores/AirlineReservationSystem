@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ChooseReservation {
+    String chosenLoc, chosenTime;
+
+    Accounts accounts = new Accounts();
+    Reserved reserved = new Reserved();
+    Reservations reservations;
     JFrame frame = new JFrame();
     Button buttonJapan = new Button("Japan");
     Button buttonKorea = new Button("Korea");
@@ -12,6 +17,8 @@ public class ChooseReservation {
     Button button7pm = new Button("7 PM");
     JPanel destinations = new JPanel();
     JPanel time = new JPanel();
+    JButton buttonSubmit = new JButton("Confirm");
+    JPanel commit = new JPanel();
     ChooseReservation(){
         frame.setVisible(true);
         frame.setSize(400,600);
@@ -28,16 +35,23 @@ public class ChooseReservation {
         time.setLayout(new FlowLayout(FlowLayout.CENTER, 10,20));
         time.add(button7am);
         time.add(button7pm);
-
-
-
-
+        commit.setLayout(new FlowLayout(FlowLayout.CENTER, 100,20));
+        commit.add(buttonSubmit);
 
         frame.add(destinations);
         frame.add(time);
+        frame.add(commit);
 
-
-
+        reserved.reserve();
+        reservations = reserved.reserved.get(accounts.accountID);
+        System.out.println("Account ID: " + accounts.accountID);
+        System.out.println("Account Name: " + accounts.accountName);
+        buttonSubmit.addActionListener(e -> {
+            reservations.destinations.add(chosenLoc);
+            reservations.timeDeparture.add(chosenTime);
+            frame.dispose();
+            new MainPage();
+        });
 
 
 
@@ -46,10 +60,13 @@ public class ChooseReservation {
         button7am.addActionListener(e -> {
             button7am.setBackground(Color.green);
             button7pm.setBackground(Color.lightGray);
+            chosenTime = "7 AM";
+
         });
         button7pm.addActionListener(e -> {
             button7am.setBackground(Color.LIGHT_GRAY);
             button7pm.setBackground(Color.GREEN);
+            chosenTime = "7 PM";
         });
         buttonJapan.addActionListener(e -> {
             buttonJapan.setBackground(Color.GREEN);
@@ -57,6 +74,7 @@ public class ChooseReservation {
             buttonKorea.setBackground(Color.LIGHT_GRAY);
             buttonTaiwan.setBackground(Color.LIGHT_GRAY);
             buttonSingapore.setBackground(Color.LIGHT_GRAY);
+            chosenLoc = "Japan";
         });
         buttonChina.addActionListener(e -> {
             buttonJapan.setBackground(Color.LIGHT_GRAY);
@@ -64,6 +82,7 @@ public class ChooseReservation {
             buttonKorea.setBackground(Color.LIGHT_GRAY);
             buttonTaiwan.setBackground(Color.LIGHT_GRAY);
             buttonSingapore.setBackground(Color.LIGHT_GRAY);
+            chosenLoc = "China";
         });
         buttonKorea.addActionListener(e -> {
             buttonJapan.setBackground(Color.LIGHT_GRAY);
@@ -71,6 +90,7 @@ public class ChooseReservation {
             buttonKorea.setBackground(Color.GREEN);
             buttonTaiwan.setBackground(Color.LIGHT_GRAY);
             buttonSingapore.setBackground(Color.LIGHT_GRAY);
+            chosenLoc = "Korea";
         });
         buttonTaiwan.addActionListener(e -> {
             buttonJapan.setBackground(Color.LIGHT_GRAY);
@@ -78,6 +98,7 @@ public class ChooseReservation {
             buttonKorea.setBackground(Color.LIGHT_GRAY);
             buttonTaiwan.setBackground(Color.GREEN);
             buttonSingapore.setBackground(Color.LIGHT_GRAY);
+            chosenLoc = "Taiwan";
         });
         buttonSingapore.addActionListener(e -> {
             buttonJapan.setBackground(Color.LIGHT_GRAY);
@@ -85,6 +106,7 @@ public class ChooseReservation {
             buttonKorea.setBackground(Color.LIGHT_GRAY);
             buttonTaiwan.setBackground(Color.LIGHT_GRAY);
             buttonSingapore.setBackground(Color.GREEN);
+            chosenLoc = "Singapore";
         });
         buttonSingapore.setFocusable(false);
         buttonJapan.setFocusable(false);
