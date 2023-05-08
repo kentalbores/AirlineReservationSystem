@@ -1,7 +1,7 @@
 import  java.util.*;
 public class Accounts {
     int accountID;
-    public String accountName = "";
+    public static String accountName = "";
     public boolean is_logged_in = false;
     private static ArrayList<String> email = new ArrayList<>();
     private static ArrayList<String> password = new ArrayList<>();
@@ -12,7 +12,7 @@ public class Accounts {
         return password;
     }
     public void addEmail(String e){
-       email.add(e);
+        email.add(e);
     }
     public void addPass(String p){
         password.add(p);
@@ -20,4 +20,3 @@ public class Accounts {
 
 
 }
-
