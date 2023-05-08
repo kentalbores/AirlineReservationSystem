@@ -10,14 +10,24 @@ public class MainPage {
     JLabel label1 = new JLabel();
     JLabel label2 = new JLabel();
     MainPage(){
+        Accounts accounts = new Accounts();
+        Reserved reserved = new Reserved();
+        if(reserved.reserved.get(accounts.accountID).destinations.size() != 0){
+            for(String i: reserved.reserved.get(accounts.accountID).destinations){
+                System.out.println("Travel Location: " + i);
+            }
+            for(String i: reserved.reserved.get(accounts.accountID).timeDeparture){
+                System.out.println("Time: " + i);
+            }
+        }
         frame.setSize(500,700);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBackground(Color.LIGHT_GRAY);
         frame.setLayout(new FlowLayout(FlowLayout.CENTER,0,20));
 
-        label1.setText("Reserved for Japan");
-        label2.setText("kdkdkd");
+        label1.setText("");
+        label2.setText("");
 
         topPanel.setPreferredSize(new Dimension(300,400));
         mainpanel.setPreferredSize(new Dimension(400, 600));
